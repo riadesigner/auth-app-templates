@@ -4,6 +4,6 @@
 
 Есть отдельные решения для:
 
-- express
-- nestjs 
+- express (ready)
+- nestjs (not ready)
 
