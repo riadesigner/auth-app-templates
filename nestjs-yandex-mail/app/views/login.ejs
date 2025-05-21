@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+
+    <style>
+
+        body{ font-family: arial;}
+        input{   margin:5px 0; }
+        
+        
+        </style>
+        
+        <h2>AJAX Авторизация</h2>
+        
+        <% if(user){%>
+        
+            <p>Привет, <%= user.name %></p>    
+            <p>
+                <a href="/api/auth/logout">выйти</a>
+            </p>
+        
+        
+        <% }else{%>
+        
+            <h3>Вход для зарегистрированных пользователей:</h3>
+    
+            <form name='signin' action="/api/auth/login/" method="post">
+                <div>
+                    <label>Логин (email):</label>
+                    <input type="text" name="email" /><br />
+                </div>
+                <div>
+                    <label>Пароль:</label>
+                    <input type="password" name="password" />
+                </div>
+                <div>
+                    <input type="submit" value="Войти" />
+                </div>
+            </form>
+    
+            <h3>Регистрация нового пользователя:</h3>
+            
+            <form action="/api/client/register" method="post">
+                <div>
+                    <label>E-mail (обяз.):</label>
+                    <input type="text" name="email" /><br />
+                </div>
+                <div>
+                    <label>Имя (обяз.):</label>
+                    <input type="text" name="name" /><br />
+                </div>    
+                <div>
+                    <label>Пароль (обяз.):</label>
+                    <input type="password" name="password" />
+                </div>            
+                <div>
+                    <label>Пароль еще раз (обяз.):</label>
+                    <input type="password" name="confirmationPassword" />
+                </div>
+                <div>
+                    <label>Телефон:</label>
+                    <input type="text" name="contactPhone" />
+                </div>    
+                <div>
+                    <input type="submit" value="Зарегистрироваться" />
+                </div>
+            </form>
+        
+        <%} %>
+         
+<script type="module">
+
+    const SignIn = {
+        init:function(){
+            this.$f = $('form[name=signin]');
+            this.$btn_submit = this.$f.find('input[type=submit]');
+            this.url = this.$f.attr('action');
+            this.behaviors();
+        },
+        behaviors:function(){
+            this.$btn_submit.on('click',(e)=>{
+                console.log("!!!clicked")
+                this.send();
+                return false;
+            })
+        },
+        send:function(){
+            const data = {
+                email:this.$f.find('[name=email]').val().trim(),
+                password:this.$f.find('[name=password]').val().trim(),
+                };
+            const s = $.ajax({
+                type: "POST",
+                url: this.url,
+                data: data,
+                dataType: 'json'
+            });
+            s.done(d=>{
+                console.log('d',d)
+                location.reload();
+            });
+            s.fail(err=>{
+                console.log('err',err.responseText)
+            });
+        }
+
+    };   
+
+    SignIn.init();
+
+</script>        
+        
+</body>
+</html>

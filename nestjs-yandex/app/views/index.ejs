@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <% if (!user) { %>
+        <p>Главная</p> 
+        <p><a href="/auth/yandex"> Войти через Яндекс </a></p>
+    <% } else { %>
+        <% if(avatar){ %>
+            <img src="<%= avatar %>" alt="avatar" style="width:100px;height:auto">
+        <% } %>        
+        <p>Привет, <%= user.username %>. </p>
+        <% if(email){ %>
+            <p>Почта: <%= email %></a>
+        <% } %>
+        <p>Перейти в <a href="/account">профиль</a>.</p>
+        <p>или</p>
+        <p><a href="/exit">Выйти из аккаунта</a></p>
+    <% } %>
+
+</body>
+</html>
+
