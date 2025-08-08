@@ -1,8 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const Navigation = () => {
-    const isAuthenticated = !!localStorage.getItem('token');
+
+    const navigate = useNavigate();
+    const { isAuthenticated, logout } = useAuth();
+
+    const dologout = () => {
+        logout();
+        navigate('/');
+    };
     
     return (
         <nav style={{ 
@@ -16,7 +24,10 @@ const Navigation = () => {
             
             <div>
                 {isAuthenticated ? (
-                    <Link to="/profile">Профиль</Link>
+                    <>
+                        <Link to="/profile">Профиль</Link> &nbsp;
+                        <button onClick={dologout}>Выйти</button>
+                    </>
                 ) : (
                     <Link to="/login">Войти</Link>
                 )}

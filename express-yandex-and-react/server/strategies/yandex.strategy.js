@@ -19,6 +19,8 @@ module.exports = (passport) => {
         avatar: profile.photos?.[0]?.value
       };
 
+      console.log('profile', profile);
+      
       const token = jwt.sign(
         { id: user.id, email: user.email },
         process.env.JWT_SECRET,

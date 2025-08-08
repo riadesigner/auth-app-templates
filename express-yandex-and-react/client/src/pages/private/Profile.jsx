@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
+import { useAuth } from '../../contexts/AuthContext';
 
 function Profile() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
+
+    console.log('Auth status changed:', isAuthenticated);
+
     const fetchUser = async () => {
       try {
         const response = await api.get('/user');

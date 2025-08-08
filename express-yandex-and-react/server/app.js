@@ -105,6 +105,18 @@ app.get('/api/user',
     }
 );
 
+app.post('/api/auth/logout', 
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    // Здесь можно:
+    // 1. Добавить токен в blacklist
+    // 2. Записать лог выхода
+    // 3. Очистить refresh-токен (если используется)    
+    res.json({ success: true, message: 'Logged out' });
+  }
+);
+
+
 app.listen(process.env.PORT, () => {
   console.log(`Сервер запущен на http://localhost:${process.env.PORT}`);
 });
