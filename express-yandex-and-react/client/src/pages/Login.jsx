@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
+import styles from './Login.module.css'
 
 const Login = () => {
   
@@ -28,11 +29,13 @@ const Login = () => {
   }, [navigate]);
 
   return (
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
     <div className="login-container">
       <h1>Вход в систему</h1>
-      <button onClick={handleLogin} className="yandex-login-btn">
+      <button onClick={handleLogin} className={styles.yandexLoginBtn}>
         Войти через Яндекс
       </button>      
+    </div>
     </div>
   );
 };

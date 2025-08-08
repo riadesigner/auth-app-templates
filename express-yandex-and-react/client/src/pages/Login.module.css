@@ -1,0 +1,11 @@
+.yandexLoginBtn{
+  background-color: gold;
+  border:none;
+  padding:.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:.3s;
+}
+.yandexLoginBtn:hover{background-color: rgb(255, 226, 61);}
+.yandexLoginBtn:active{background-color: gold;transition:0;}
