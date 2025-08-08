@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import api from '../utils/api';
 import styles from './Login.module.css'
+
 
 const Login = () => {
   
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const error = searchParams.get('error');  
 
   const handleLogin = () => {
     window.location.href = 'http://localhost:3000/auth/yandex';
@@ -20,8 +23,8 @@ const Login = () => {
         if (response.data.isAuthenticated) {
           navigate('/profile');
         } 
-      } catch (error) {                
-        console.log('Пользователь не аутентифицирован. Необходимо заново войти', error);
+      } catch (err) {                
+        console.log('Пользователь не аутентифицирован. Необходимо заново войти', err);
       }
     };
 
@@ -30,11 +33,24 @@ const Login = () => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-    <div className="login-container">
+    <div className="login-container">      
       <h1>Вход в систему</h1>
       <button onClick={handleLogin} className={styles.yandexLoginBtn}>
         Войти через Яндекс
-      </button>      
+      </button>
+
+      {error === 'session_expired' && (
+        <div className="alert alert-warning">
+          Ваша сессия истекла. Пожалуйста, войдите снова.
+        </div>
+      )}
+      
+      {error === 'auth_failed' && (
+        <div className="alert alert-danger">
+          Ошибка авторизации. Попробуйте еще раз.
+        </div>
+      )}
+                  
     </div>
     </div>
   );
