@@ -25,7 +25,7 @@ passport.use(
     new YandexStrategy({
         clientID: YANDEX_CLIENT_ID,
         clientSecret: YANDEX_CLIENT_SECRET,
-        callbackURL: "http://127.0.0.1:3000/auth/yandex/callback",                
+        callbackURL: "http://127.0.0.1:3000/auth/yandex/callback",
     },
     (accessToken, refreshToken, profile, done) => {
         process.nextTick(()=>{
