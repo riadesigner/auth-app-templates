@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
 
 function Profile() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -11,6 +13,7 @@ function Profile() {
         setUser(response.data);
       } catch (err) {
         console.error('Ошибка загрузки профиля', err);
+        navigate('/login');
       }
     };
     
@@ -26,7 +29,7 @@ function Profile() {
         </div>
       ) : (
         <p>Загрузка...</p>
-      )}
+      )}      
     </div>
   );
 }

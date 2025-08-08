@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import api from '../utils/api';
 
 const Login = () => {
+  
   const navigate = useNavigate();
+
+  const [errMessage, setErrMessage] = useState('');
 
   const handleLogin = () => {
     // Открываем окно авторизации Яндекс
@@ -29,7 +31,7 @@ useEffect(() => {
     } catch (error) {
       // 3. Ошибка уже обработана в интерцепторе, но можно добавить доп. логику
       console.error('Проверка авторизации не удалась:', error);
-      navigate('/');
+      navigate('/login');
     }
   };
 
@@ -42,6 +44,11 @@ useEffect(() => {
       <button onClick={handleLogin} className="yandex-login-btn">
         Войти через Яндекс
       </button>
+      {
+        errMessage && (
+          <p>{errMessage}</p>
+        )
+      }
     </div>
   );
 };

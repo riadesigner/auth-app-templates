@@ -4,76 +4,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
-
-// ------------
-// JWT STRATEGY
-// ------------
-const jwt = require('jsonwebtoken');
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const jwtOpts = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET
-};
-passport.use(new JwtStrategy(jwtOpts, (jwt_payload, done) => {
-    return done(null, jwt_payload.user || jwt_payload);
-}));
-
-// ---------------
-// YANDEX STRATEGY
-// ---------------
-const YandexStrategy = require('passport-yandex').Strategy;
-passport.use(
-    new YandexStrategy({
-        clientID: process.env.YANDEX_CLIENT_ID,
-        clientSecret: process.env.YANDEX_CLIENT_SECRET,
-        callbackURL: `http://localhost:${process.env.PORT}/auth/yandex/callback`,
-    },
-    async (accessToken, refreshToken, profile, done) => {
-        try {
-            // Валидация данных
-            if (!profile.emails?.[0]?.value) {
-                throw new Error("Email is required");
-            }
-
-            // Формируем пользователя
-            const user = {
-                id: profile.id,
-                email: profile.emails[0].value,
-                displayName: profile.displayName,
-                avatar: profile.photos?.[0]?.value
-            };
-
-            // Генерируем токен
-            const token = jwt.sign(
-                { 
-                    id: user.id,
-                    email: user.email,                    
-                },
-                process.env.JWT_SECRET,
-                { expiresIn: '15m' }
-            );
-
-            // Для отладки
-            console.log('Generated token for:', user.email);
-
-            return done(null, { ...user, token });
-        } catch (err) {
-            console.error('Yandex auth error:', err);
-            return done(err);
-        }
-    })
-);
-
-// ----------------------------
-//    PASSPORT CUSTOMIZATION
-// ----------------------------
-passport.serializeUser((user,done)=>{
-    done(null, user);
-});
-passport.deserializeUser((obj,done)=>{
-    done(null, obj);
-});
+const configurePassport = require('./config/passport');
 
 // -------------------
 //      APP INIT
@@ -93,6 +24,10 @@ app.use(session({
   }
 }));
 
+// Конфигурация Passport
+configurePassport();
+
+// Middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -130,12 +65,9 @@ app.get('/', (req, res)=>{
     res.render('index',{user});
 });
 
-// 1. Инициируем OAuth-поток
-app.get('/auth/yandex', 
-    passport.authenticate('yandex')
-);
-
-// 2. Обрабатываем callback от Яндекса
+// Инициируем OAuth-поток в Yandex
+app.get('/auth/yandex', passport.authenticate('yandex'));
+// Обрабатываем callback от Яндекса
 app.get('/auth/yandex/callback', 
   passport.authenticate('yandex', { session: false }),
   (req, res) => {    
@@ -164,6 +96,7 @@ app.get('/api/protected', (req, res) => {
     res.status(401).json({ error: 'Неверный токен' });
   }
 });
+
 // Защищённый роут
 app.get('/api/user', 
     passport.authenticate('jwt', { session: false }),

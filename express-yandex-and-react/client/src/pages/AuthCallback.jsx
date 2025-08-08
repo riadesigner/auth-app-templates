@@ -17,6 +17,9 @@ export default function AuthCallback() {
     } else {
       navigate('/login'); // Если токена нет
     }
+
+
+
   });
 
   return <div>Processing authentication...</div>;
