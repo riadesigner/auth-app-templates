@@ -52,7 +52,7 @@ app.use((req, res, next) => {
   console.log('\n=== Новый запрос ===');
   console.log('Session ID:', req.sessionID);
   console.log('Headers:', req.headers);
-  console.log('Cookies:', req.cookies);
+  //console.log('Cookies:', req.cookies);
   next();
 });
 
@@ -67,15 +67,30 @@ app.get('/', (req, res)=>{
 
 // Инициируем OAuth-поток в Yandex
 app.get('/auth/yandex', passport.authenticate('yandex'));
-// Обрабатываем callback от Яндекса
+
+// Обработчик callback
 app.get('/auth/yandex/callback', 
-  passport.authenticate('yandex', { session: false }),
-  (req, res) => {    
+  (req, res, next) => {
+    passport.authenticate('yandex', { session: false, failureRedirect: '/auth-failed' })(req, res, err => {
+    // проверка на ошибку, когда jwt устарел 
+      if (err) {
+        if (err.message.includes('Code has expired')) {
+          return res.redirect(`${process.env.FRONT_URL}/login?error=session_expired`);
+        }
+        return next(err);
+      }
+      // ошибок нет, идем дальше
+      next();
+    });
+  },
+  (req, res) => {
+    // Успешная аутентификация     
     res.redirect(`${process.env.FRONT_URL}/auth-callback?token=${encodeURIComponent(req.user.token)}`);    
   }
 );
 
-// 3. Проверка аутентификации (опционально)
+
+// Проверка аутентификации (опционально)
 app.get('/api/check-auth', 
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
@@ -115,7 +130,6 @@ app.post('/api/auth/logout',
     res.json({ success: true, message: 'Logged out' });
   }
 );
-
 
 app.listen(process.env.PORT, () => {
   console.log(`Сервер запущен на http://localhost:${process.env.PORT}`);
