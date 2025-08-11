@@ -1,9 +1,7 @@
 // Создаём экземпляр axios с интерцепторами
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'http://localhost:3000/api'
-});
+const api = axios.create({baseURL: '/api'});
 
 // Добавляем токен в каждый запрос
 api.interceptors.request.use(config => {
