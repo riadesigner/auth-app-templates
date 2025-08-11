@@ -1,0 +1,27 @@
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./client:/app           # Монтируем исходный код клиента
+      - /app/node_modules       # Исключаем перезапись node_modules
+    ports:
+      - "5173:5173"            # Порт Vite по умолчанию
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Для работы hot-reload в Docker (для mac/windows)
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./server:/app           # Монтируем исходный код сервера
+      - /app/node_modules       # Исключаем перезапись node_modules
+    ports:
+      - "3000:3000"            # Порт Express
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+      
