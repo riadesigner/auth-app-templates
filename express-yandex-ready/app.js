@@ -6,7 +6,7 @@ const YandexStrategy = require('passport-yandex').Strategy;
 
 const YANDEX_CLIENT_ID = process.env.YANDEX_CLIENT_ID;
 const YANDEX_CLIENT_SECRET = process.env.YANDEX_CLIENT_SECRET;
-const YANDEX_CLIENT_CALLBACK = process.env.YANDEX_CLIENT_CALLBACK;
+const YANDEX_CALLBACK_URL = process.env.YANDEX_CALLBACK_URL;
 
 function isAuthenticated(req,res,next){
     if(req.isAuthenticated()){
@@ -26,7 +26,7 @@ passport.use(
     new YandexStrategy({
         clientID: YANDEX_CLIENT_ID,
         clientSecret: YANDEX_CLIENT_SECRET,
-        callbackURL: YANDEX_CLIENT_CALLBACK,
+        callbackURL: YANDEX_CALLBACK_URL,
     },
     (accessToken, refreshToken, profile, done) => {
         process.nextTick(()=>{

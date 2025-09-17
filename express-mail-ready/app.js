@@ -8,7 +8,7 @@ const rnd = require("randomstring");
 
 const MAILRU_CLIENT_ID = process.env.MAILRU_CLIENT_ID;
 const MAILRU_CLIENT_SECRET = process.env.MAILRU_CLIENT_SECRET;
-const MAILRU_CLIENT_CALLBACK = process.env.MAILRU_CLIENT_CALLBACK;
+const MAILRU_CALLBACK_URL = process.env.MAILRU_CALLBACK_URL;
 
 
 function isAuthenticated(req,res,next){
@@ -33,7 +33,7 @@ passport.use(
     new MailruStrategy({
         clientID: MAILRU_CLIENT_ID,
         clientSecret: MAILRU_CLIENT_SECRET,
-        callbackURL: MAILRU_CLIENT_CALLBACK,
+        callbackURL: MAILRU_CALLBACK_URL,
         state: SERCRET_RANDOM_STRING,
     },
     (accessToken, refreshToken, profile, done) => {
