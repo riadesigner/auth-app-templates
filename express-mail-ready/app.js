@@ -29,7 +29,7 @@ passport.use(
     new MailruStrategy({
         clientID: MAILRU_CLIENT_ID,
         clientSecret: MAILRU_CLIENT_SECRET,
-        callbackURL: "http://127.0.0.1:3000/auth/mailru/callback",
+        callbackURL: "http://localhost:3000/auth/mailru/callback",
         state: SERCRET_RANDOM_STRING,
     },
     (accessToken, refreshToken, profile, done) => {
