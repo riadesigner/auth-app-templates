@@ -8,6 +8,8 @@ const rnd = require("randomstring");
 
 const MAILRU_CLIENT_ID = process.env.MAILRU_CLIENT_ID;
 const MAILRU_CLIENT_SECRET = process.env.MAILRU_CLIENT_SECRET;
+const MAILRU_CLIENT_CALLBACK = process.env.MAILRU_CLIENT_CALLBACK;
+
 
 function isAuthenticated(req,res,next){
     if(req.isAuthenticated()){
@@ -25,11 +27,13 @@ passport.deserializeUser((obj,done)=>{
 
 const SERCRET_RANDOM_STRING = rnd.generate(12);
 
+console.log('SERCRET_RANDOM_STRING', SERCRET_RANDOM_STRING);;
+
 passport.use(
     new MailruStrategy({
         clientID: MAILRU_CLIENT_ID,
         clientSecret: MAILRU_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/mailru/callback",
+        callbackURL: MAILRU_CLIENT_CALLBACK,
         state: SERCRET_RANDOM_STRING,
     },
     (accessToken, refreshToken, profile, done) => {
