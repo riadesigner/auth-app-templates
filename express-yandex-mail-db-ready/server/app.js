@@ -12,6 +12,7 @@ configurePassport(app);
 app.set('view engine','ejs');
 
 app.use('/auth',require('./auth/auth.routes')); // auth через яндекс и mailru  
+app.use('/api',require('./auth/auth-api.routes')); // jwt
 app.use('/',require('./auth/login.routes')); // разные роуты для логина и выхода
 
 app.get('/', (req, res)=>{

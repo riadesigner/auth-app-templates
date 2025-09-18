@@ -10,11 +10,11 @@ import App from './App.jsx'
 import Home from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import AuthCallback from './pages/AuthCallback.jsx';
-
 // --------------------
 //    PRIVATE PAGES
 // --------------------
-// ...
+import AdminPage from './pages/private/AdminPage.jsx'
+import ClientAdminPage from './pages/private/ClientAdminPage.jsx'
 
 import { AuthProvider } from './providers/AuthProvider.jsx';
 import ErrorPage from './pages/ErrorPage.jsx'
@@ -26,6 +26,9 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />, // Обработка ошибок маршрутизации
     children: [
+      // ---------------
+      //  public pages 
+      // ---------------      
       { index: true, element: <Home /> },         // Главная страница
       { path: 'login', element: <LoginPage /> }, // /вход
       { path: 'auth-callback', element: <AuthCallback /> }, //             
@@ -33,8 +36,9 @@ const router = createBrowserRouter([
       // ---------------
       //  private pages 
       // ---------------     
-
-      // { path: 'cp/client-admin', element: <AdminDesignersPage /> }, // /сводная таблица о дизайнерах на сайте      
+      { path: 'cp/client-admin', element: <ClientAdminPage /> }, // /кабинет пользователя (клиента)
+      { path: 'cp/admin', element: <AdminPage /> }, // /кабинет администратора
+      
       // Ленивая загрузка (опционально)
       // { 
       //   path: 'dashboard', 

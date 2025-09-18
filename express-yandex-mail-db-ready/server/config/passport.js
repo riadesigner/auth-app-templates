@@ -3,14 +3,13 @@ const jwtStrategy = require('../strategies/jwt.strategy');
 const yandexStrategy = require('../strategies/yandex.strategy');
 
 // const YandexStrategy = require('passport-yandex').Strategy;
-// const MailruStrategy = require('passport-mailru-email').Strategy;
+const MailruStrategy = require('passport-mailru-email').Strategy;
 
 module.exports = (app) => {
   
     // Инициализация стратегий
     jwtStrategy(passport);
     yandexStrategy(passport);    
-
 
     // ----------------------------
     //    MAIL.RU AUTHENTICATION
