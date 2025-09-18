@@ -4,7 +4,7 @@ const passport = require('passport');
 
 const YandexStrategy = require('passport-yandex').Strategy;
 const MailruStrategy = require('passport-mailru-email').Strategy;
-module.exports = () => {
+module.exports = (app) => {
   
     // Инициализация стратегий
 
@@ -52,5 +52,8 @@ module.exports = () => {
     passport.deserializeUser((obj, done) => {
     done(null, obj);
     });
+
+    app.use(passport.initialize());
+    app.use(passport.session());    
 
 };
