@@ -1,0 +1,46 @@
+
+.portItem{
+  cursor: pointer;
+  position: relative;
+}
+
+.imagesBlock{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:.5rem;
+  border-radius: 10px;  
+}
+.imagesBlock span{
+  background-color: rgb(242, 242, 242);
+  border-radius: 6px;
+  height: 150px;
+}
+
+.confirmWindow{
+  position: absolute;
+  top:0;left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,.8);
+  display: flex;
+  align-items: center;  
+  justify-content: center;
+}
+
+/* ----------------------------- 
+    
+   STARTED MOBILE MODE FROM HERE 
+
+   ----------------------------- */
+
+@media (max-width: 1023px) {
+ 
+  .imagesBlock{
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .imagesBlock span{
+    height: 50px;
+  }
+
+}
+

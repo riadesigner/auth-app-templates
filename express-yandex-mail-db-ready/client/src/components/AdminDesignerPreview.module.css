@@ -1,0 +1,13 @@
+.designerPreview{    
+    display: flex;    
+    gap:.25rem;
+    cursor: pointer;
+    margin-bottom:1rem;
+}
+.designerPreview:hover>span{background: var(--link-color); color:white;}
+.designerPreview>span{ background: var(--superlight-color); border-radius:6px;padding:.5rem .5rem;}
+.designerPreview>span:nth-child(1){ width:25%;}
+.designerPreview>span:nth-child(2){ width:25%;}
+.designerPreview>span:nth-child(3){ width:25%;}
+.designerPreview>span:nth-child(4){ width:25%;text-align: right;}
+

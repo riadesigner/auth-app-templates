@@ -1,0 +1,25 @@
+
+.portfolio{
+    overflow:hidden;
+    height:180px;
+}
+.portfolio>div{
+    width: 110%;
+}
+
+/* ----------------------------- 
+    
+   STARTED MOBILE MODE FROM HERE 
+
+   ----------------------------- */
+
+   
+@media (max-width: 1023px) {
+    .portfolio{
+        overflow:auto;
+        height:auto;
+    }  
+    .portfolio>div{
+        width: 100%;
+    }
+}   

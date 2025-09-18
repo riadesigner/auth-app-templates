@@ -1,0 +1,124 @@
+
+/* --- SECOND MENU --- */
+
+/* .second-menu-public{display: block;}
+.second-menu-private{display: none;}
+
+.has-logined .second-menu-public{display: none;}
+.has-logined .second-menu-private{display: block;} */
+
+
+/* --- YO-CATEGORIES (MAIN PAGE) --- */
+
+.yo-categories .column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;    
+    background-color: var(--link-color); 
+    color:white;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+/* --- YO-FOOTER --- */
+.yo-footer {position: relative;padding-top: 1rem;;} 
+.yo-footer::after{
+    content: "";border-top:2px solid var(--primary-color);
+    position: absolute;top:0;width: calc(100% - 2rem);left:1rem;
+}
+.yo-footer-menu a{margin-left: 3rem;;}
+.yo-footer-menu a.is-active{color:var(--success-color)}
+
+.site-footer{
+    height:40px; 
+    background-color: var(--link-color);    
+}
+
+/* --- WHY-YOLK-BANNER --- */
+
+.why-yolk-banner{
+    border-radius: 20px;    
+    height:480px;
+    width:90%;
+}
+
+.yo-main-tasks .block{
+    border:1px solid #c8c8c8;padding:1rem !important;    
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    background-color: white;
+    height: 130px;
+}
+.yo-main-tasks .block:not(:first-child){ margin-top: -20px;}
+.yo-main-tasks i{ content:"";position: absolute; right:10px;bottom:30px; font-size:1.5rem; color:#c8c8c8;}
+.yo-main-tasks .block:last-child{border-radius: 10px !important;}
+.yo-main-tasks .block:last-child i{bottom:15px !important;}
+.yo-main-tasks .block:nth-child(2){ background-color: #d0d0d0;}
+.yo-main-tasks .block:nth-child(3){ background-color: var(--link-color);}
+.yo-main-tasks .block:nth-child(3) h1{color: #fff !important;}
+.yo-main-tasks .block:nth-child(2) i{ color: #9b9b9b !important;}
+.yo-main-tasks .block:nth-child(3) i{color: #ffffff !important;}
+
+.yo-portfolio-container-preview{
+    border:2px solid red;overflow:hidden ;
+}
+.yo-portfolio-container-preview__container{
+    border:3px solid orange;
+}
+.yo-portfolio-preview__item{
+    background: green;
+}
+
+/* --- PAGE LOGIN --- */
+
+.loggin-block{padding:3rem 0;text-align: center;}
+.loggin-block button:not(:last-child){margin-bottom:1rem;}
+
+
+
+
+.stars-block-label{margin-bottom:.75rem;}
+.stars-block-items{display:flex;gap: .5rem;}
+.stars-block-items span {
+    width: .9rem;height: .9rem;border-radius: 50%;;
+    border:1px solid var(--primary-color);}
+.stars-block-items span.is-active{background-color: var(--primary-color);}
+
+
+/* ---------------------- COMMON RESPOSIVE ------------------------ */
+
+/* xl: { max: "1279px" }, */
+@media (max-width: 1279px) { 
+    
+}
+
+/* ---------------------------------- 
+
+    started mobile mode from here 
+
+ ----------------------------------- */
+
+/* lg: { max: "1023px" }, */
+@media (max-width: 1023px) {
+
+.yo-footer-menu a{margin-left: auto;margin-bottom:1rem;}
+.yo-footer-logo{margin:0 1rem 0 0;}
+
+.why-yolk-banner{height:40vh; width:100%;}
+
+.loggin-block{padding:1.5rem 0;}
+
+}
+
+/* md: { max: "767px" }, */
+@media (max-width: 767px) {
+
+}
+
+/* sm: { max: "639px" }, */
+@media (max-width: 639px) {
+
+}

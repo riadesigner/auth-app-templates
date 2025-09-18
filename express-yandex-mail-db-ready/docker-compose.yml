@@ -1,0 +1,73 @@
+services:
+
+  mongo:
+      image: mongo
+      container_name: coffe.db
+      restart: always
+      environment:
+          - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
+          - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+          - MONGO_INITDB_DATABASE=${DB_NAME}           
+      ports:
+          - 27027:27017
+      volumes: 
+          - ./db:/data/db
+      networks:
+        - coffe-network            
+  mongo-express:
+      image: mongo-express
+      container_name: coffe.db-express
+      restart: always
+      ports:
+        - 8081:8081
+      environment:
+        ME_CONFIG_BASICAUTH_USERNAME: ${MONGOEXPRESS_LOGIN}
+        ME_CONFIG_BASICAUTH_PASSWORD: ${MONGOEXPRESS_PASSWORD}
+        ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USER}:${MONGO_ROOT_PASSWORD}@mongo:27017          
+      depends_on:
+        - mongo
+      networks:
+        - coffe-network
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    container_name: coffe.server
+    restart: always       
+    volumes:
+      - ./server:/app           # Монтируем исходный код сервера
+      - /app/node_modules       # Исключаем перезапись node_modules
+    ports:
+      - 3000:3000               # Порт Express
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongo
+    networks:
+      - coffe-network    
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    container_name: coffe.client
+    restart: always       
+    volumes:
+      - ./client:/app           # Монтируем исходный код клиента
+      - /app/node_modules       # Исключаем перезапись node_modules
+    ports:
+      - 5173:5173               # Порт Vite по умолчанию
+    env_file:
+      - .env      
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Для работы hot-reload в Docker (для mac/windows)      
+    depends_on:
+      - server
+    networks:
+      - coffe-network  
+      
+networks:
+  coffe-network:
+    driver: bridge

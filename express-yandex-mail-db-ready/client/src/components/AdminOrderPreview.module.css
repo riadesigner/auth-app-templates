@@ -1,0 +1,11 @@
+.order{    
+    display: flex;    
+    gap:.25rem;     
+    cursor: pointer;
+}
+.order:hover>span{background: var(--link-color); color:white;}
+.order>span{ background: var(--superlight-color);border-radius:6px;padding:.5rem .5rem }
+.order>span:nth-child(1){ width:40%;}
+.order>span:nth-child(2){ width:30%;text-align: center;}
+.order>span:nth-child(3){ width:30%;text-align: right;}
+

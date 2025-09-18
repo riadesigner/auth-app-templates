@@ -1,0 +1,27 @@
+.pageLinks {text-align: center;}
+.pageLinks span, .pageLinks a{
+    display: inline-block;
+    background-color: var(--superlight-color);
+    padding:.25rem .5rem;
+    border-radius: 5px;
+    color:black;
+    font-size: .9rem;
+    margin:0 .25rem;
+}
+
+.pageLinks span{
+    background-color: var(--link-color);
+    color: white;
+}
+
+
+/* ----------------------------- 
+    
+   STARTED MOBILE MODE FROM HERE 
+
+   ----------------------------- */
+
+@media (max-width: 1023px) {
+ 
+
+}

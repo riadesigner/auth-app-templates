@@ -1,0 +1,5 @@
+.preview{
+    padding:1rem;
+    box-shadow: var(--shadow-params);
+    border-radius: 10px;
+}

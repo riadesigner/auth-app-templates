@@ -1,0 +1,33 @@
+.preview{
+    border-radius: 10px;
+    box-shadow: var(--shadow-params);
+    padding:1rem;
+    position: relative;
+}
+
+.previewHeader{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:.5rem;    
+}
+.previewHeader > div{
+    background-color: rgb(239, 239, 239);
+    height: 100px;
+}
+
+.avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgb(226, 226, 226);
+    position: absolute;
+    top:80px;
+    left:50%;
+    transform:translateX(-50%);
+    border: 2px solid white;    
+}
+
+.fio{
+    margin: 50px 0 0 0;;
+    text-align: center;
+}

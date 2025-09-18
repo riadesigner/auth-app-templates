@@ -1,0 +1,44 @@
+
+.message{
+    border:1px solid var(--light-color);
+    margin-bottom:1rem;
+    position: relative;
+    padding:1.25rem 1.25rem 1.25rem 60px;
+    border-radius: 6px;    
+}
+.messageBell{    
+    position: absolute;
+    left:0;top:0;width: 40px;
+    height: 100%;    
+    background-color: var(--superlight-color);
+    border-radius: 6px 0 0 6px;
+    padding:10px 0 0 12px;
+    color:var(--light-color);
+}
+
+.messageLinks{
+    text-align: right;    
+}
+
+.message h3{line-height: 1.4;font-size: 1rem;}
+.message small{font-size: .7rem;}
+
+.message h3{margin: 0;}
+
+.message h3,
+.message small{color:var(--dark-color) !important;}
+.message span i{color:var(--light-color) !important;}
+
+/* ---------------------------------- 
+
+    started mobile mode from here 
+
+ ----------------------------------- */
+
+/* lg: { max: "1023px" }, */
+@media (max-width: 1023px) {
+
+/* .inbox-message{margin-bottom:.75rem; padding:1rem 1rem 1rem 55px;}
+.inbox-message h3{font-size: .9rem;} */
+
+}

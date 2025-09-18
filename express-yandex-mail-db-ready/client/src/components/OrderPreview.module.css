@@ -1,0 +1,43 @@
+.order{
+    box-shadow: var(--shadow-params);
+    border-radius: 10px;
+    padding:1.5rem 1.5rem;     
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;    
+}
+.order > a { 
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 3;
+}
+.order > a h2{ position: relative;}
+.order > a h2:after {
+    content: "";
+    position: absolute;
+    left:-1.5rem;top:0;
+    height: 100%;
+    width: 5px;
+    transition: .3s;
+    transform:scale(0);
+    background-color: var(--primary-color);
+}
+.order > a:hover h2:after{
+    transform:scale(1);
+}
+.order > a:hover{
+    opacity: 1;
+}
+
+.order > a > p {margin: 0 0 0 auto;}
+
+.order > hr {margin: 10px 0 20px 0 !important;width: 100%;}
+.company a{
+     font-weight: 400; 
+     font-size: 0.75rem; 
+     padding:.15rem 0.5rem;
+     border-radius:20px;
+     background-color: var(--primary-color);
+     color: white;
+}
