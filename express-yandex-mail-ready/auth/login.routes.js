@@ -8,6 +8,13 @@ function isAuthenticated(req,res,next){
     res.redirect('/');
 };
 
+router.get('/auth-error',     
+    (req, res)=>{
+    res.json({
+        error: 'Authentication error',
+    });
+});
+
 router.get('/account', 
     isAuthenticated,
     (req, res)=>{

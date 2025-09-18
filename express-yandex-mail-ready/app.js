@@ -11,7 +11,12 @@ app.use(require('express-session')({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,   
-    // cookie: { secure: true }
+    // cookie: {
+    //     secure: false,
+    //     sameSite: 'none',
+    //     httpOnly: false,
+    //     maxAge: 10 * 60 * 1000,
+    // }
 }))
 
 app.set('view engine','ejs');

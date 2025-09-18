@@ -7,7 +7,9 @@ const router = express.Router();
 
 
 router.get('/yandex', 
-    passport.authenticate('yandex')
+    (req, res, next)=>{
+        passport.authenticate('yandex')(req, res, next);
+    }
 );
 
 router.get('/mailru',    
@@ -18,7 +20,7 @@ router.get('/mailru',
 
 
 router.get('/yandex/callback', 
-    passport.authenticate('yandex', {failureRedirect: '/'}),
+    passport.authenticate('yandex', {failureRedirect: '/auth-error'}),
     (req, res)=>{
         
         res.redirect('/')
@@ -27,7 +29,7 @@ router.get('/yandex/callback',
 
 
 router.get('/mailru/callback', 
-    passport.authenticate('mailru', {failureRedirect: '/'}),
+    passport.authenticate('mailru', {failureRedirect: '/auth-error'}),
     (req, res)=>{
         res.redirect('/')
     }
