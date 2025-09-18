@@ -27,8 +27,6 @@ passport.deserializeUser((obj,done)=>{
 
 const SERCRET_RANDOM_STRING = rnd.generate(12);
 
-console.log('SERCRET_RANDOM_STRING', SERCRET_RANDOM_STRING);;
-
 passport.use(
     new MailruStrategy({
         clientID: MAILRU_CLIENT_ID,
