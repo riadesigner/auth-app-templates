@@ -11,6 +11,7 @@ module.exports = () => {
     //   jwtStrategy(passport);
     //   yandexStrategy(passport);
 
+    console.log('process.env.YANDEX_CALLBACK_URL', process.env.YANDEX_CALLBACK_URL)
     // ----------------------------
     //    YANDEX AUTHENTICATION
     // ----------------------------
