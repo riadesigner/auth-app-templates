@@ -36,5 +36,11 @@ export default function AuthCallback() {
     }
   }, []);
 
-  return <div>Processing authentication...</div>;
+  return (
+      <section className="section">
+        <div className="container">
+          <div>Processing authentication...</div>;
+        </div>
+      </section>
+  )  
 }

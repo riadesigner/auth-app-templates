@@ -1,14 +1,14 @@
-const YandexStrategy = require('passport-yandex').Strategy;
+const MailruStrategy = require('passport-mailru-email').Strategy;
 // const usersService = require('../users/users.service');
 const JWTUtils = require('../utils/jwtUtils');
 
 module.exports = (passport) => {
   
   passport.use(
-    new YandexStrategy({
-        clientID: process.env.YANDEX_CLIENT_ID,
-        clientSecret: process.env.YANDEX_CLIENT_SECRET,
-        callbackURL: process.env.YANDEX_CALLBACK_URL,
+    new MailruStrategy({
+        clientID: process.env.MAILRU_CLIENT_ID,
+        clientSecret: process.env.MAILRU_CLIENT_SECRET,
+        callbackURL: process.env.MAILRU_CALLBACK_URL,
   }, async (accessToken, refreshToken, profile, done) => {
     try {
       // --------------------
@@ -19,7 +19,7 @@ module.exports = (passport) => {
       if (!emails?.[0]?.value) { throw new Error("Email is required"); }
 
       const userData = {
-        yandexId: id,
+        mailruId: id,
         email: emails[0].value,
         name: username,
         avatar: photos?.[0]?.value        
@@ -51,7 +51,7 @@ module.exports = (passport) => {
       // }
 
       const usr = {
-        id:`${userData.yandexId}_${userData.email}`,
+        id:`${userData.mailruId}_${userData.email}`,
         email:userData.email,
         role:'client'
       }
@@ -59,14 +59,14 @@ module.exports = (passport) => {
       const payload = { id: usr.id, email: usr.email, role:usr.role };      
 
       const token = JWTUtils.generateToken(payload, { expiresIn: '2h' });
-      console.log('Yandex auth success for:', payload );
+      console.log('Mailru auth success for:', payload );
               
       process.nextTick(()=>{
           return done(null, { ...usr, token, accessToken });
       })
 
     } catch (err) {
-      console.error('Yandex auth error:', err);
+      console.error('Mailru auth error:', err);
       return done(err.message);
     }
 

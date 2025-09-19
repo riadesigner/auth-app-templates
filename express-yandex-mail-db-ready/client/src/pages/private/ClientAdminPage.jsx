@@ -3,8 +3,8 @@ import { useAuth } from '../../contexts/AuthContext';
 
 export default function ClientAdminPage(){
 
-    const dologout = () => {
-        logout();
+    const dologout = async () => {
+        await logout();
         navigate('/');
     };
 
