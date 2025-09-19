@@ -28,7 +28,7 @@ router.get('/yandex/callback',
         })(req, res, err=>{
             // проверка на ошибку, когда jwt устарел 
             if (err) {
-                if (err.message.includes('Code has expired')) {
+                if (err.message && err.message.includes('Code has expired')) {
                 return res.redirect(`${errRedirect}?error=session_expired`);
                 }
                 return next(err);
